@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200">
+  <rect width="200" height="200" fill="#1a120b"/>
+  <circle cx="100" cy="100" r="92" fill="#f3ead9"/>
+  <circle cx="100" cy="100" r="86" fill="none" stroke="#6b4423" stroke-width="3"/>
+  <g stroke="#6b4423" stroke-width="4" fill="none" stroke-linecap="round">
+    <path d="M60 150 Q100 120 140 150"/>
+    <path d="M70 165 Q100 145 130 165"/>
+    <path d="M100 60 L100 110"/>
+    <path d="M100 110 Q70 125 60 150"/>
+    <path d="M100 110 Q130 125 140 150"/>
+  </g>
+  <circle cx="100" cy="100" r="6" fill="#6b4423"/>
+  <text x="100" y="188" text-anchor="middle" font-family="Georgia, serif" font-size="14" fill="#6b4423" letter-spacing="2">OMY'S</text>
+</svg>

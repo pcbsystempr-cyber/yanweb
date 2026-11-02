@@ -1,0 +1,87 @@
+/* ============================================================
+   Omy's Wood Art — Design tokens
+   Light/Dark via light-dark() + color-mix()
+   ============================================================ */
+
+:root {
+  color-scheme: light dark;
+  /* --- Light theme (default) --- */
+  --cream:        light-dark(#C9B89A, #2a1f15);     /* fondo principal crema (más oscuro) */
+  --cream-soft:   light-dark(#ddd4c4, #241a12);
+  --ink:          light-dark(#714018, #F7F2EA);     /* texto */
+  --ink-soft:     light-dark(#4a3d2a, #d4c4a8);
+  --muted:        light-dark(#8a7a63, #a89578);
+  --wood:         light-dark(#714018, #e8c08a);     /* títulos y acentos marrón */
+  --wood-deep:    light-dark(#5a3413, #714018);
+  --wood-light:   light-dark(#9a5f24, #e0b478);
+  --leaf:         light-dark(#5a7d3a, #8fae5a);
+  --leaf-deep:    light-dark(#3f5a2a, #5a7d3a);
+  --accent:       light-dark(#2B8C3B, #4db36b);     /* verde acento (alrededor de fotos) */
+  --cta:          light-dark(#714018, #c08a4a);     /* marrón para botones (era naranja) */
+  --banner-bg:    light-dark(#714018, #c08a4a);     /* marrón para el banner hero (era naranja) */
+  --accent-soft:  light-dark(#e6f2e8, #1f3323);
+  --line:         light-dark(#d8cab6, #3a2c20);
+  --surface:      light-dark(#F7F2EA, #241a12);
+  --surface-2:    light-dark(#f3ead9, #1A120B);
+  --shadow:       light-dark(0 1px 2px rgba(40,25,10,.06), 0 8px 24px rgba(40,25,10,.06), 0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.4));
+  --shadow-lg:    light-dark(0 2px 6px rgba(40,25,10,.08), 0 24px 60px rgba(40,25,10,.12), 0 2px 6px rgba(0,0,0,.5), 0 24px 60px rgba(0,0,0,.55));
+
+  --font-display: "Iowan Old Style", "Palatino Linotype", Georgia, "Times New Roman", serif;
+  --font-sans:    "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-mono:    "SF Mono", "Fira Code", ui-monospace, Menlo, monospace;
+
+  --radius-sm: 8px;
+  --radius:   14px;
+  --radius-lg:24px;
+
+  --container: 1200px;
+  --header-h: 72px;
+  --gap: 24px;
+}
+
+[data-theme="dark"] {
+  /* --- Dark theme --- */
+  --cream:        #2a1f15;     /* fondo oscuro */
+  --cream-soft:   #241a12;
+  --ink:          #F7F2EA;
+  --ink-soft:     #d4c4a8;
+  --muted:        #a89578;
+  --wood:         #e8c08a;     /* títulos y acentos marrón */
+  --wood-deep:    #714018;
+  --wood-light:   #e0b478;
+  --leaf:         #8fae5a;
+  --leaf-deep:    #5a7d3a;
+  --accent:       #4db36b;     /* verde más claro en oscuro */
+  --cta:          #c08a4a;     /* marrón para botones (era ámbar) */
+  --banner-bg:    #c08a4a;     /* marrón para el banner hero (era naranja) */
+  --accent-soft:  #1f3323;
+  --line:         #3a2c20;
+  --surface:      #241a12;
+  --surface-2:    #1A120B;
+  --shadow:       0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.4);
+  --shadow-lg:    0 2px 6px rgba(0,0,0,.5), 0 24px 60px rgba(0,0,0,.55);
+}
+
+/* prefers-reduced-motion: kill all motion */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --scroll-parallax-duration: 0s;
+  }
+  *, *::before, *::after {
+    animation-duration: .001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .001ms !important;
+  }
+}
+
+/* ============================================================
+   Hero banner tokens (8/3 desktop, 4/5 mobile)
+   ============================================================ */
+:root {
+  --hero-ratio-desktop: 8 / 3;
+  --hero-ratio-mobile:    4 / 5;
+  --hero-height-min: 320px;
+  --hero-height-max: 70dvh;
+  --hero-parallax: 0.12;   /* suave */
+}

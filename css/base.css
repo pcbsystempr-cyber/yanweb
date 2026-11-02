@@ -1,0 +1,253 @@
+/* Omy's Wood Art - Base styles */
+@import url('./tokens.css');
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  color: var(--ink);
+  background-color: var(--cream);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-display);
+  color: var(--wood);
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+h1 {
+  font-size: clamp(2rem, 5vw, 4rem);
+}
+
+h2 {
+  font-size: clamp(1.5rem, 4vw, 3rem);
+}
+
+h3 {
+  font-size: clamp(1.25rem, 3vw, 2rem);
+}
+
+h4 {
+  font-size: clamp(1.125rem, 2.5vw, 1.5rem);
+}
+
+h5 {
+  font-size: clamp(1rem, 2vw, 1.25rem);
+}
+
+h6 {
+  font-size: clamp(0.875rem, 1.5vw, 1rem);
+}
+
+p {
+  margin-bottom: 1rem;
+  font-size: clamp(0.875rem, 1.5vw, 1rem);
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--wood);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+button,
+.btn {
+  font-family: var(--font-sans);
+  font-size: clamp(0.875rem, 1.5vw, 1rem);
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: var(--radius);
+  background-color: var(--accent);
+  color: var(--cream);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-block;
+  text-align: center;
+}
+
+button:hover,
+.btn:hover {
+  background-color: var(--leaf-deep);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+button:focus,
+.btn:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+button:active,
+.btn:active {
+  transform: translateY(0);
+}
+
+button:disabled,
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.container {
+  width: min(var(--container), 90%);
+  margin: 0 auto;
+}
+
+/* Navbar fijo */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background-color: var(--cream);
+  border-bottom: 1px solid var(--line);
+  box-shadow: var(--shadow);
+}
+
+.nav-container {
+  width: min(var(--container), 90%);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 0;
+  min-height: var(--header-h);
+}
+
+.nav-logo .logo-img {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+  object-fit: cover;
+  display: block;
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.nav-link {
+  color: var(--wood);
+  font-weight: 600;
+  font-size: clamp(0.875rem, 1.5vw, 1rem);
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: var(--accent);
+}
+
+.theme-btn {
+  padding: 0.5rem 1rem;
+  font-size: clamp(0.75rem, 1.25vw, 0.875rem);
+}
+
+/* Hero */
+.hero {
+  padding-top: var(--header-h);
+  background-color: var(--banner-bg);
+}
+
+.hero-banner {
+  width: 100%;
+  overflow: hidden;
+}
+
+.hero-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  aspect-ratio: var(--hero-ratio-desktop);
+}
+
+.hero-content {
+  width: min(var(--container), 90%);
+  margin: 0 auto;
+  padding: 2rem 0;
+  text-align: center;
+}
+
+.hero-title {
+  margin-bottom: 0.75rem;
+  color: var(--cream);
+}
+
+.hero-subtitle {
+  color: var(--cream);
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  margin-bottom: 1.5rem;
+}
+
+.btn-whatsapp {
+  background-color: var(--cream);
+  color: var(--banner-bg);
+}
+
+.btn-whatsapp:hover {
+  background-color: var(--cream-soft);
+  color: var(--banner-bg);
+}
+
+@media (max-width: 768px) {
+  .hero-image {
+    aspect-ratio: var(--hero-ratio-mobile);
+  }
+  
+  .nav-menu {
+    gap: 0.75rem;
+  }
+  
+  .nav-container {
+    padding: 0.5rem 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  
+  .navbar,
+  .nav-link,
+  .theme-btn,
+  .btn,
+  button {
+    transition: none !important;
+  }
+}

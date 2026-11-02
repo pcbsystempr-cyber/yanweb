@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin - Omy's Wood Art</title>
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/cart.css">
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <!-- Login Container -->
+  <div id="login-container" class="login-container" style="display: none;">
+    <div class="login-card">
+      <div class="login-header">
+        <img src="../assets/logo-sello.png" alt="Omy's Wood Art" width="80" height="80" class="login-logo">
+        <h1>Admin</h1>
+        <p>Inicia sesión para gestionar pedidos</p>
+      </div>
+      <form id="login-form" novalidate>
+        <div id="login-error" class="login-error" style="display: none;"></div>
+        <div class="login-field">
+          <label for="login-email">Correo electrónico</label>
+          <input type="email" id="login-email" class="login-input" required autocomplete="email" placeholder="admin@omyswoodart.com">
+        </div>
+        <div class="login-field">
+          <label for="login-password">Contraseña</label>
+          <input type="password" id="login-password" class="login-input" required autocomplete="current-password" placeholder="••••••••">
+        </div>
+        <button type="submit" id="login-btn" class="btn login-btn">Entrar</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Admin Panel (hidden until authenticated) -->
+  <div id="admin-panel" style="display: none;">
+    <header class="admin-header">
+      <h1 id="admin-title">Pedidos</h1>
+      <button id="theme-toggle" class="theme-btn" aria-label="Cambiar tema">🌙</button>
+    </header>
+
+    <main class="admin-main">
+      <!-- Orders Section -->
+      <section id="orders-section" class="admin-section">
+        <div class="admin-toolbar">
+          <div class="admin-status-filter">
+            <select id="status-filter">
+              <option value="">Todos</option>
+              <option value="pendiente">Pendiente</option>
+              <option value="confirmado">Confirmado</option>
+              <option value="en_produccion">En producción</option>
+              <option value="entregado">Entregado</option>
+              <option value="cancelado">Cancelado</option>
+            </select>
+          </div>
+        </div>
+        <div id="orders-list" class="orders-list"></div>
+        <div id="orders-empty" class="orders-empty" style="display: none;">
+          <p>No hay pedidos</p>
+        </div>
+      </section>
+
+      <!-- Products Section -->
+      <section id="products-section" class="admin-section" style="display: none;">
+        <div class="admin-toolbar">
+          <h2>Productos</h2>
+          <button id="add-product-btn" class="btn btn-primary">+ Nuevo</button>
+        </div>
+        <div id="products-message" class="admin-message" style="display: none;"></div>
+        <div id="products-grid" class="products-grid"></div>
+        <div id="products-empty" class="orders-empty" style="display: none;">
+          <p>No hay productos. Crea el primero.</p>
+        </div>
+      </section>
+
+      <!-- Delivery Section -->
+      <section id="delivery-section" class="admin-section" style="display: none;">
+        <div class="admin-toolbar">
+          <h2>Municipios y Envío</h2>
+        </div>
+        <div id="delivery-message" class="admin-message" style="display: none;"></div>
+        
+        <!-- Municipalities Table -->
+        <div class="table-container">
+          <div class="table-toolbar">
+            <div class="search-box">
+              <input type="search" id="municipality-search" placeholder="Buscar municipio..." aria-label="Buscar municipio">
+            </div>
+            <div class="filter-box">
+              <select id="region-filter" aria-label="Filtrar por región">
+                <option value="">Todas las regiones</option>
+              </select>
+            </div>
+            <button id="bulk-edit-btn" class="btn btn-secondary">Editar por región</button>
+          </div>
+          <table id="municipalities-table" class="admin-table">
+            <thead>
+              <tr>
+                <th>Municipio</th>
+                <th>Región</th>
+                <th>Precio Base ($)
+                  <label class="toggle-switch toggle-header">
+                    <input type="checkbox" id="toggle-all-active" aria-label="Activar/desactivar todos">
+                    <span class="toggle-slider"></span>
+                  </label>
+                </th>
+                <th>Activo</th>
+              </tr>
+            </thead>
+            <tbody id="municipalities-tbody"></tbody>
+          </table>
+        </div>
+        <div id="municipalities-empty" class="orders-empty" style="display: none;">
+          <p>No hay municipios configurados</p>
+        </div>
+
+        <!-- Delivery Settings -->
+        <div class="settings-panel">
+          <h3>Ajustes de Envío</h3>
+          <form id="delivery-settings-form" novalidate>
+            <div class="settings-grid">
+              <div class="form-field">
+                <label for="weight-surcharge">Recargo por peso ($/kg)</label>
+                <input type="number" id="weight-surcharge" step="0.01" min="0" value="0" placeholder="0.00">
+              </div>
+              <div class="form-field">
+                <label for="size-surcharge">Recargo por volumen ($/cm³)</label>
+                <input type="number" id="size-surcharge" step="0.0001" min="0" value="0" placeholder="0.0000">
+              </div>
+              <div class="form-field">
+                <label for="min-delivery">Envío mínimo ($)</label>
+                <input type="number" id="min-delivery" step="0.01" min="0" value="0" placeholder="0.00">
+              </div>
+              <div class="form-field">
+                <label for="free-delivery-over">Envío gratis sobre ($)</label>
+                <input type="number" id="free-delivery-over" step="0.01" min="0" value="0" placeholder="0.00">
+              </div>
+            </div>
+            <div class="modal-actions">
+              <button type="submit" id="settings-submit-btn" class="btn btn-primary">Guardar Ajustes</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <!-- Brand Section -->
+      <section id="brand-section" class="admin-section" style="display: none;">
+        <div class="admin-toolbar">
+          <h2>Marca e Imágenes</h2>
+        </div>
+        <div id="brand-message" class="admin-message" style="display: none;"></div>
+        
+        <div class="brand-grid">
+          <!-- Hero Banner -->
+          <div class="brand-card">
+            <div class="brand-preview" id="preview-hero_banner">
+              <img src="../assets/hero-banner.jpg" alt="Banner Principal" onerror="this.src='../assets/hero-banner.jpg'">
+            </div>
+            <div class="brand-info">
+              <h3>Banner Principal (Hero)</h3>
+              <p class="brand-hint">Imagen principal de la página de inicio. Ratio 8:3 desktop, 4:5 móvil.</p>
+            </div>
+            <div class="brand-controls">
+              <input type="file" id="brand-hero_banner" accept="image/*" class="brand-file-input">
+              <button type="button" id="brand-reset-hero_banner" class="btn btn-secondary btn-sm">Restaurar</button>
+            </div>
+          </div>
+
+          <!-- Logo Seal -->
+          <div class="brand-card">
+            <div class="brand-preview" id="preview-logo_seal">
+              <img src="../assets/logo-sello.png" alt="Sello / Logo Pequeño" onerror="this.src='../assets/logo-sello.png'">
+            </div>
+            <div class="brand-info">
+              <h3>Sello / Logo Pequeño</h3>
+              <p class="brand-hint">Logo circular para navbar y favicon. Cuadrado recomendado.</p>
+            </div>
+            <div class="brand-controls">
+              <input type="file" id="brand-logo_seal" accept="image/*" class="brand-file-input">
+              <button type="button" id="brand-reset-logo_seal" class="btn btn-secondary btn-sm">Restaurar</button>
+            </div>
+          </div>
+
+          <!-- Logo Full -->
+          <div class="brand-card">
+            <div class="brand-preview" id="preview-logo_full">
+              <img src="../assets/logo-full.jpg" alt="Logo Completo" onerror="this.src='../assets/logo-full.jpg'">
+            </div>
+            <div class="brand-info">
+              <h3>Logo Completo</h3>
+              <p class="brand-hint">Logo horizontal con texto completo. Para footer y documentos.</p>
+            </div>
+            <div class="brand-controls">
+              <input type="file" id="brand-logo_full" accept="image/*" class="brand-file-input">
+              <button type="button" id="brand-reset-logo_full" class="btn btn-secondary btn-sm">Restaurar</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="brand-actions">
+          <button id="brand-save-btn" class="btn btn-primary">Guardar Cambios</button>
+        </div>
+      </section>
+
+      <!-- Leads Section -->
+      <section id="leads-section" class="admin-section" style="display: none;">
+        <div class="admin-toolbar">
+          <h2>Cotizaciones (Leads)</h2>
+          <button id="leads-refresh-btn" class="btn btn-secondary">Actualizar</button>
+        </div>
+        <div id="leads-message" class="admin-message" style="display: none;"></div>
+        
+        <div class="table-toolbar">
+          <div class="search-box">
+            <input type="search" id="lead-search" placeholder="Buscar por nombre, email, teléfono..." aria-label="Buscar cotizaciones">
+          </div>
+          <div class="filter-box">
+            <select id="lead-status-filter" aria-label="Filtrar por estado">
+              <option value="">Todos los estados</option>
+              <option value="nuevo">Nuevo</option>
+              <option value="info_pendiente">Información pendiente</option>
+              <option value="cotizacion_enviada">Cotización enviada</option>
+              <option value="seguimiento_1">Seguimiento 1</option>
+              <option value="seguimiento_2">Seguimiento 2</option>
+              <option value="aprobado">Aprobado</option>
+              <option value="en_produccion">En producción</option>
+              <option value="entregado">Entregado</option>
+              <option value="no_convertido">No convertido</option>
+            </select>
+          </div>
+        </div>
+        
+        <div class="table-container">
+          <table id="leads-table" class="admin-table">
+            <thead>
+              <tr>
+                <th>Fecha</th>
+                <th>Cliente</th>
+                <th>Contacto</th>
+                <th>Producto</th>
+                <th>Municipio</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody id="leads-tbody"></tbody>
+          </table>
+        </div>
+        <div id="leads-empty" class="orders-empty" style="display: none;">
+          <p>No hay cotizaciones</p>
+        </div>
+      </section>
+
+      <!-- Settings Section (placeholder) -->
+      <section id="settings-section" class="admin-section" style="display: none;">
+        <h2>Ajustes</h2>
+        <p class="placeholder-text">Próximamente: configuración de envío, categorías, etc.</p>
+      </section>
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav id="bottom-nav" class="bottom-nav" style="display: none;">
+      <a href="#" class="nav-item active" data-section="orders">
+        <span class="nav-icon">📦</span>
+        <span class="nav-label">Pedidos</span>
+      </a>
+      <a href="#" class="nav-item" data-section="products">
+        <span class="nav-icon">🪵</span>
+        <span class="nav-label">Productos</span>
+      </a>
+      <a href="#" class="nav-item" data-section="delivery">
+        <span class="nav-icon">🚚</span>
+        <span class="nav-label">Envío</span>
+      </a>
+      <a href="#" class="nav-item" data-section="brand">
+        <span class="nav-icon">🎨</span>
+        <span class="nav-label">Marca</span>
+      </a>
+      <a href="#" class="nav-item" data-section="leads">
+        <span class="nav-icon">📋</span>
+        <span class="nav-label">Cotizaciones</span>
+      </a>
+      <a href="#" class="nav-item" data-section="settings">
+        <span class="nav-icon">⚙️</span>
+        <span class="nav-label">Ajustes</span>
+      </a>
+      <button id="logout-btn" class="nav-item logout-btn" aria-label="Cerrar sesión">
+        <span class="nav-icon">🚪</span>
+        <span class="nav-label">Salir</span>
+      </button>
+    </nav>
+  </div>
+
+  <!-- Product Modal -->
+  <dialog id="product-modal" class="product-modal">
+    <div class="modal-header">
+      <h2 id="product-modal-title">Nuevo Producto</h2>
+      <button class="modal-close" aria-label="Cerrar">&times;</button>
+    </div>
+    <div class="modal-body">
+      <form id="product-form" novalidate>
+        <div id="product-form-message" class="form-message" style="display: none;"></div>
+        
+        <div class="form-field">
+          <label for="product-name">Nombre *</label>
+          <input type="text" id="product-name" required placeholder="Nombre del producto">
+        </div>
+        
+        <div class="form-field">
+          <label for="product-price">Precio ($) *</label>
+          <input type="number" id="product-price" step="0.01" min="0" required placeholder="0.00">
+        </div>
+        
+        <div class="form-field">
+          <label for="product-category">Categoría *</label>
+          <select id="product-category" class="product-category-select" required>
+            <option value="">Selecciona categoría</option>
+          </select>
+        </div>
+        
+        <div class="form-field">
+          <label for="product-description">Descripción</label>
+          <textarea id="product-description" rows="3" placeholder="Descripción del producto"></textarea>
+        </div>
+        
+        <div class="form-field">
+          <label for="product-sort-order">Orden</label>
+          <input type="number" id="product-sort-order" min="0" value="0" placeholder="0">
+        </div>
+        
+        <div class="form-field checkbox-field">
+          <label class="checkbox-label">
+            <input type="checkbox" id="product-active" checked>
+            <span class="checkbox-custom"></span>
+            Activo
+          </label>
+        </div>
+        
+        <div class="form-field">
+          <label>Imágenes</label>
+          <input type="file" id="product-images" accept="image/*" multiple>
+          <p class="field-hint">Selecciona varias imágenes. Se comprimirán a WebP automáticamente.</p>
+          <div id="image-preview" class="image-preview-grid"></div>
+        </div>
+        
+        <div class="modal-actions">
+          <button type="button" id="product-cancel-btn" class="btn btn-secondary">Cancelar</button>
+          <button type="submit" id="product-submit-btn" class="btn btn-primary">Crear Producto</button>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
+  <!-- Delete Confirmation Modal -->
+  <dialog id="delete-modal" class="confirm-modal">
+    <div class="modal-header">
+      <h2>Eliminar Producto</h2>
+    </div>
+    <div class="modal-body">
+      <p>¿Estás seguro de que quieres eliminar <strong id="delete-product-name"></strong>? Esta acción no se puede deshacer.</p>
+      <div class="modal-actions">
+        <button type="button" id="cancel-delete-btn" class="btn btn-secondary">Cancelar</button>
+        <button type="button" id="confirm-delete-btn" class="btn btn-danger">Eliminar</button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Bulk Edit Modal -->
+  <dialog id="bulk-edit-modal" class="confirm-modal">
+    <div class="modal-header">
+      <h2>Editar Precios por Región</h2>
+    </div>
+    <div class="modal-body">
+      <form id="bulk-edit-form" novalidate>
+        <p class="bulk-edit-description">Aumenta o disminuye el precio base de todos los municipios activos en una región por un porcentaje.</p>
+        
+        <div class="form-field">
+          <label for="bulk-region-select">Región *</label>
+          <select id="bulk-region-select" required>
+            <option value="">Selecciona región</option>
+          </select>
+        </div>
+        
+        <div class="form-field">
+          <label for="bulk-percent">Porcentaje (%) *</label>
+          <input type="number" id="bulk-percent" step="0.1" required placeholder="Ej: 10 para subir 10%, -5 para bajar 5%">
+          <p class="field-hint">Valores positivos suben el precio, negativos lo bajan.</p>
+        </div>
+        
+        <div class="modal-actions">
+          <button type="button" id="cancel-bulk-btn" class="btn btn-secondary">Cancelar</button>
+          <button type="submit" id="bulk-submit-btn" class="btn btn-primary">Aplicar</button>
+        </div>
+      </form>
+    </div>
+  </dialog>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="../config.js"></script>
+  <script type="module" src="../js/supabase-client.js"></script>
+  <script type="module" src="auth.js"></script>
+  <script type="module" src="orders.js"></script>
+  <script type="module" src="products.js"></script>
+  <script type="module" src="delivery.js"></script>
+  <script type="module" src="brand.js"></script>
+  <script type="module" src="leads.js"></script>
+</body>
+</html>

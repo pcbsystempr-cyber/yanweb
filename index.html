@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Omy's Wood Art - Carpintería a medida en Puerto Rico</title>
+  <meta name="description" content="Carpintería a medida en Puerto Rico. Construimos juntos. Creamos para durar.">
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/cart.css">
+</head>
+<body>
+  <nav class="navbar" role="navigation" aria-label="Menú principal">
+    <div class="nav-container">
+      <div class="nav-logo">
+        <a href="#inicio" aria-label="Ir al inicio">
+          <img src="assets/logo-sello.png" alt="Omy's Wood Art" width="56" height="56" class="logo-img">
+        </a>
+      </div>
+      <div class="nav-menu">
+        <a href="#inicio" class="nav-link" data-i18n="nav.inicio">Inicio</a>
+        <a href="#quienes-somos" class="nav-link" data-i18n="nav.nosotros">Nosotros</a>
+        <a href="#catalogo" class="nav-link" data-i18n="nav.catalogo">Productos</a>
+        <button id="theme-toggle" class="theme-btn" aria-label="Cambiar tema" data-i18n="nav.theme">Oscuro</button>
+      </div>
+    </div>
+  </nav>
+
+  <header id="inicio" class="hero" role="banner">
+    <div class="hero-banner">
+      <picture>
+        <source media="(max-width: 768px)" srcset="assets/hero-banner.jpg">
+        <img src="assets/hero-banner.jpg" alt="Trabajo de carpintería a medida" class="hero-image">
+      </picture>
+    </div>
+    <div class="hero-content">
+      <h1 class="hero-title" data-i18n="hero.title">De la madera a la obra.</h1>
+      <p class="hero-subtitle" data-i18n="hero.subtitle">Construimos juntos. Creamos para durar.</p>
+      <a href="https://wa.me/17875550123" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp" aria-label="Contactar por WhatsApp" data-i18n="hero.whatsapp">
+        Contactar por WhatsApp
+      </a>
+    </div>
+  </header>
+
+  <section id="quienes-somos" class="section">
+    <div class="container">
+      <header class="section-header">
+        <h2 class="section-title" data-i18n="section.quienes-somos">Quiénes Somos</h2>
+        <p class="section-subtitle">Carpintería a medida en Puerto Rico, operada por un matrimonio</p>
+      </header>
+      <div class="grid grid-2">
+        <div class="card scroll-reveal">
+          <h3>Nuestra Historia</h3>
+          <p>Construimos muebles y piezas únicas con dedicación artesanal, cuidando cada detalle desde la selección de la madera hasta el acabado final.</p>
+        </div>
+        <div class="card scroll-reveal">
+          <h3>Nuestro Compromiso</h3>
+          <p>Trabajamos juntos con nuestros clientes para crear piezas que perduren en el tiempo, con calidad y cariño en cada proyecto.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="servicios" class="section">
+    <div class="container">
+      <header class="section-header">
+        <h2 class="section-title" data-i18n="section.servicios">Servicios</h2>
+        <p class="section-subtitle">Soluciones completas en carpintería a medida</p>
+      </header>
+      <div class="card scroll-reveal">
+        <ul class="services-list">
+          <li>Muebles a medida</li>
+          <li>Soluciones para espacios</li>
+          <li>Comercial</li>
+          <li>Piezas de diseño</li>
+          <li>Instalación y terminación</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="proceso" class="section">
+    <div class="container">
+      <header class="section-header">
+        <h2 class="section-title" data-i18n="section.proceso">Proceso</h2>
+        <p class="section-subtitle">Así creamos tus proyectos paso a paso</p>
+      </header>
+      <div class="grid grid-3">
+        <div class="card scroll-reveal">
+          <h3 data-i18n="proceso.step1.title">1. Consulta</h3>
+          <p data-i18n="proceso.step1.desc">Escuchamos tus ideas y necesidades para entender tu proyecto.</p>
+        </div>
+        <div class="card scroll-reveal">
+          <h3 data-i18n="proceso.step2.title">2. Diseño y Presupuesto</h3>
+          <p data-i18n="proceso.step2.desc">Desarrollamos el diseño y te presentamos una cotización detallada.</p>
+        </div>
+        <div class="card scroll-reveal">
+          <h3 data-i18n="proceso.step3.title">3. Fabricación</h3>
+          <p data-i18n="proceso.step3.desc">Creamos tu pieza a mano con maderas seleccionadas y acabados de calidad.</p>
+        </div>
+        <div class="card scroll-reveal">
+          <h3 data-i18n="proceso.step4.title">4. Entrega e Instalación</h3>
+          <p data-i18n="proceso.step4.desc">Entregamos e instalamos tu proyecto con cuidado profesional.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="aliados" class="section">
+    <div class="container">
+      <header class="section-header">
+        <h2 class="section-title" data-i18n="section.aliados">Aliados</h2>
+        <p class="section-subtitle">Trabajamos con aliados estratégicos para ofrecer lo mejor</p>
+      </header>
+      <div class="grid grid-4">
+        <div class="card scroll-reveal" style="text-align: center;">
+          <p>Aliado 1</p>
+        </div>
+        <div class="card scroll-reveal" style="text-align: center;">
+          <p>Aliado 2</p>
+        </div>
+        <div class="card scroll-reveal" style="text-align: center;">
+          <p>Aliado 3</p>
+        </div>
+        <div class="card scroll-reveal" style="text-align: center;">
+          <p>Aliado 4</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="catalogo" class="section">
+    <div class="container">
+      <header class="section-header">
+        <h2 class="section-title" data-i18n="section.catalogo">Catálogo</h2>
+        <p class="section-subtitle">Descubre nuestras creaciones</p>
+      </header>
+      <div class="catalog-controls">
+        <select id="category-filter" class="catalog-filter">
+          <option value="">Todas las categorías</option>
+        </select>
+        <input type="search" id="search-input" class="catalog-search" placeholder="Buscar productos...">
+      </div>
+      <div id="catalog-grid" class="catalog-grid"></div>
+      <div id="catalog-empty" class="catalog-empty" style="display: none;">
+        <p>No hay productos disponibles en este momento. Vuelve pronto.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Product Detail Modal -->
+  <dialog id="product-modal" class="product-modal">
+    <div class="product-modal-content">
+      <button class="product-modal-close" aria-label="Cerrar">&times;</button>
+      <div class="product-modal-body"></div>
+    </div>
+  </dialog>
+
+  <section id="testimonios" class="section">
+    <div class="container">
+      <header class="section-header">
+        <h2 class="section-title" data-i18n="section.testimonios">Testimonios</h2>
+        <p class="section-subtitle">Lo que dicen nuestros clientes</p>
+      </header>
+      <div id="testimonials-grid" class="grid grid-2"></div>
+      <div id="testimonials-empty" class="catalog-empty" style="display: none;">
+        <p>No hay testimonios disponibles en este momento.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Omy's Wood Art</h3>
+          <p>Carpintería a medida en Puerto Rico</p>
+          <p>Construimos juntos. Creamos para durar.</p>
+        </div>
+        <div class="footer-section">
+          <h4 data-i18n="footer.contacto">Contacto</h4>
+          <p>WhatsApp: 17875550123</p>
+          <p>Email: omyswoodarts@gmail.com</p>
+        </div>
+        <div class="footer-section">
+          <h4 data-i18n="footer.redes">Redes</h4>
+          <p>@Omyswoodart</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Omy's Wood Art. Puerto Rico. <a href="admin/index.html" style="color: var(--muted); text-decoration: none; font-size: 0.875rem; opacity: 0.7;" data-i18n="footer.admin">Admin</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Welcome Questionnaire Modal -->
+  <dialog id="welcome-modal" class="welcome-modal">
+    <div class="welcome-modal-content">
+      <div class="welcome-header">
+        <h1 data-i18n="welcome.title">¡Bienvenido a Omy's Wood Art!</h1>
+      </div>
+      <div class="welcome-body">
+        <h2 data-i18n="welcome.subtitle">Configura tu experiencia</h2>
+        
+        <div class="welcome-question">
+          <label data-i18n="welcome.q1">1. ¿Prefieres modo claro u oscuro?</label>
+          <div class="welcome-options">
+            <button type="button" class="welcome-opt" data-theme="light" data-i18n="welcome.theme.light">Claro (crema)</button>
+            <button type="button" class="welcome-opt" data-theme="dark" data-i18n="welcome.theme.dark">Oscuro</button>
+          </div>
+        </div>
+
+        <div class="welcome-question">
+          <label data-i18n="welcome.q2">2. ¿En qué idioma prefieres la página?</label>
+          <div class="welcome-options">
+            <button type="button" class="welcome-opt" data-lang="es" data-i18n="welcome.lang.es">Español</button>
+            <button type="button" class="welcome-opt" data-lang="en" data-i18n="welcome.lang.en">English</button>
+          </div>
+        </div>
+
+        <div class="welcome-question">
+          <label data-i18n="welcome.q3">3. ¿Te gustaría música de fondo?</label>
+          <div class="welcome-options">
+            <button type="button" class="welcome-opt" data-music="yes" data-i18n="welcome.music.yes">Sí, activar música</button>
+            <button type="button" class="welcome-opt" data-music="no" data-i18n="welcome.music.no">No, gracias</button>
+          </div>
+        </div>
+
+        <div class="welcome-actions">
+          <button type="button" id="welcome-continue" class="btn welcome-btn-continue" data-i18n="welcome.continue" disabled>Continuar</button>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- Music Control -->
+  <div id="music-control" class="music-control" style="display: none;">
+    <button id="music-toggle" class="music-btn" aria-label="Música de fondo">♪ Música</button>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="config.js"></script>
+  <script type="module" src="js/supabase-client.js"></script>
+  <script type="module" src="js/catalog.js"></script>
+  <script type="module" src="js/testimonios.js"></script>
+  <script type="module" src="js/cart.js"></script>
+  <script src="js/theme.js"></script>
+  <script type="module" src="js/welcome.js"></script>
+</body>
+</html>
